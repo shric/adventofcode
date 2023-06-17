@@ -16,7 +16,7 @@ count = 5617
 # Y = you choose paper
 # Z = you choose scissors
 
-def solution2(filename):
+def solution2(filename: str) -> tuple[int, int]:
     part_1_scores = {
         'A X': 1 + 3, 'A Y': 2 + 6, 'A Z': 3 + 0,
         'B X': 1 + 0, 'B Y': 2 + 3, 'B Z': 3 + 6,

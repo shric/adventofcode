@@ -3,7 +3,7 @@
 count = 5780
 
 
-def solution1(filename):
+def solution1(filename: str) -> tuple[int, int]:
     maxsum = 0
     sums = []
     with open(filename) as file:

@@ -2,12 +2,12 @@
 
 from itertools import zip_longest
 
-count = 2027
+count = 2985
 
 
-def solution5(filename):
-    stack_lines = []
-    inst_lines = []
+def solution5(filename: str) -> tuple[str, str]:
+    stack_lines: list[str] = []
+    inst_lines: list[str] = []
     push_list = stack_lines
     with open(filename) as file:
         for line in file:
@@ -22,6 +22,7 @@ def solution5(filename):
 
     part1 = []
     for i in list(map(list, zip_longest(*lol, fillvalue="    "))):
+        x: list[str]
         part1.append([x[1] for x in filter(lambda x: x != '    ', reversed(i[:-1]))])
 
     part2 = [x[:] for x in part1]
@@ -29,11 +30,13 @@ def solution5(filename):
     for line in inst_lines:
         _, quant, _, src, _, dst = line.split()
         quant = int(quant)
+        dst = int(dst)-1
+        src = int(src)-1
         for i in range(quant):
-            part1[int(dst) - 1].append(part1[int(src) - 1].pop())
+            part1[dst].append(part1[src].pop())
 
-        part2[int(dst) - 1].extend(part2[int(src) - 1][-quant:])
-        del (part2[int(src) - 1][-quant:])
+        part2[dst].extend(part2[src][-quant:])
+        del (part2[src][-quant:])
 
     return "".join([x.pop() for x in part1]), "".join([x.pop() for x in part2])
 

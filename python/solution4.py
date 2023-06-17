@@ -3,7 +3,7 @@
 count = 1886
 
 
-def solution4(filename):
+def solution4(filename: str) -> tuple[int, int]:
     part1 = part2 = 0
     with open(filename) as file:
         for line in file:

@@ -3,14 +3,14 @@
 count = 1824
 
 
-def prio(c):
+def prio(c: str) -> int:
     if c.isupper():
         return ord(c) - ord('A') + 1 + 26
     else:
         return ord(c) - ord('a') + 1
 
 
-def solution3(filename):
+def solution3(filename: str) -> tuple[int, int]:
     part1 = 0
     lines = []
     with open(filename) as file:
