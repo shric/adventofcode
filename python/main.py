@@ -4,6 +4,17 @@ from glob import glob
 from importlib import import_module
 from timeit import timeit
 
+
+def humantime(ns):
+    if ns < 1000:
+        return f"{ns:.3f} ns"
+    if ns < 1000000:
+        return f"{ns / 1000:.3f} µs"
+    if ns < 1000000000:
+        return f"{ns / 1000000:.3f} ms"
+    return f"{ns / 1000000000:.3f} s"
+
+
 if __name__ == "__main__":
     num = len(glob("solution*.py"))
     for i in range(num):
@@ -17,6 +28,6 @@ if __name__ == "__main__":
         func = eval(f'sol.solution{a}')
         lam = lambda: func(f"../input/{a}.txt")
 
-        us = timeit(lam, number=count) * 1000000/count
+        ns = timeit(lam, number=count) * 1000000000 / count
         answer = "".join([f"{x:>10}" for x in lam()])
-        print(f"Day {a:>2}: {answer} solved in {us:.3f} µs (ran {count:>5} times)")
+        print(f"Day {a:>2}: {answer} solved in {humantime(ns):>10} (ran {count:>5} times)")
