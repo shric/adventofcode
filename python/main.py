@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+from glob import glob
 from importlib import import_module
 from timeit import timeit
 
 if __name__ == "__main__":
-    for i in range(3):
+    num = len(glob("solution*.py"))
+    for i in range(num):
         a = i + 1
         module_name = f"solution{a}"
         sol = import_module(module_name)
