@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+count = 5780
+
+
 def solution1(filename):
     maxsum = 0
     sums = []
@@ -14,6 +17,7 @@ def solution1(filename):
                 continue
             s += int(line)
     return maxsum, sum(sorted(sums, reverse=True)[:3])
+
 
 if __name__ == '__main__':
     print(solution1("../input/1.txt"))

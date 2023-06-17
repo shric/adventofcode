@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+count = 1824
+
+
 def prio(c):
     if c.isupper():
         return ord(c) - ord('A') + 1 + 26

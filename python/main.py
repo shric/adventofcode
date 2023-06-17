@@ -10,8 +10,13 @@ if __name__ == "__main__":
         a = i + 1
         module_name = f"solution{a}"
         sol = import_module(module_name)
+        if hasattr(sol, 'count'):
+            count = sol.count
+        else:
+            count = 1000
         func = eval(f'sol.solution{a}')
         lam = lambda: func(f"../input/{a}.txt")
 
-        us = timeit(lam, number=1000) * 1000
-        print(f"Day {a}: {lam()} solved in {us:.3f} µs")
+        us = timeit(lam, number=count) * 1000000/count
+        answer = "".join([f"{x:>8}" for x in lam()])
+        print(f"Day {a:>2}: {answer} solved in {us:.3f} µs (ran {count:>5} times)")

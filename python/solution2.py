@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+count = 5617
+
+
 # A = opponent chooses rock
 # B = opponent chooses paper
 # C = opponent chooses scissors

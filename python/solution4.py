@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+count = 1886
+
+
 def solution4(filename):
     part1 = part2 = 0
     with open(filename) as file:
@@ -23,7 +27,6 @@ def solution4(filename):
             if lefts[0] <= rights[0] <= lefts[1]:
                 part2 += 1
                 continue
-
 
     return part1, part2
 
