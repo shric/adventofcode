@@ -13,8 +13,7 @@ def solution1(filename):
                 s = 0
                 continue
             s += int(line)
-    print(maxsum)
-    print(sum(sorted(sums, reverse=True)[:3]))
+    return maxsum, sum(sorted(sums, reverse=True)[:3])
 
 if __name__ == '__main__':
-    solution1("../input/1.txt")
+    print(solution1("../input/1.txt"))

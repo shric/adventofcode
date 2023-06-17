@@ -34,9 +34,8 @@ def solution2(filename):
             part_1_score += part_1_scores[line]
             part_2_score += part_2_scores[line]
 
-        print(part_1_score)
-        print(part_2_score)
+        return part_1_score, part_2_score
 
 
 if __name__ == '__main__':
-    solution2("../input/2.txt")
+    print(solution2("../input/2.txt"))
