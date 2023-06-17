@@ -13,5 +13,5 @@ if __name__ == "__main__":
         func = eval(f'sol.solution{a}')
         lam = lambda: func(f"../input/{a}.txt")
 
-        us = timeit(lam, number=1000) * 1000
+        us = timeit(lam, number=10000) * 100
         print(f"Day {a}: {lam()} solved in {us:.3f} µs")
