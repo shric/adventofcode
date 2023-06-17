@@ -18,5 +18,5 @@ if __name__ == "__main__":
         lam = lambda: func(f"../input/{a}.txt")
 
         us = timeit(lam, number=count) * 1000000/count
-        answer = "".join([f"{x:>8}" for x in lam()])
+        answer = "".join([f"{x:>10}" for x in lam()])
         print(f"Day {a:>2}: {answer} solved in {us:.3f} µs (ran {count:>5} times)")
