@@ -2,11 +2,10 @@
 
 from itertools import zip_longest
 
-count = 2597
+count = 2027
 
 
 def solution5(filename):
-    part1 = part2 = 0
     stack_lines = []
     inst_lines = []
     push_list = stack_lines
@@ -21,16 +20,22 @@ def solution5(filename):
     for line in stack_lines:
         lol.append([line[i:i + 4] for i in range(0, len(line), 4)])
 
-    transposed = []
+    part1 = []
     for i in list(map(list, zip_longest(*lol, fillvalue="    "))):
-        transposed.append([x[1] for x in filter(lambda x: x != '    ', reversed(i[:-1]))])
+        part1.append([x[1] for x in filter(lambda x: x != '    ', reversed(i[:-1]))])
+
+    part2 = [x[:] for x in part1]
 
     for line in inst_lines:
         _, quant, _, src, _, dst = line.split()
-        for i in range(int(quant)):
-            transposed[int(dst) - 1].append(transposed[int(src) - 1].pop())
+        quant = int(quant)
+        for i in range(quant):
+            part1[int(dst) - 1].append(part1[int(src) - 1].pop())
 
-    return "".join([x.pop() for x in transposed]), 0
+        part2[int(dst) - 1].extend(part2[int(src) - 1][-quant:])
+        del (part2[int(src) - 1][-quant:])
+
+    return "".join([x.pop() for x in part1]), "".join([x.pop() for x in part2])
 
 
 if __name__ == '__main__':
