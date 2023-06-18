@@ -3,7 +3,7 @@
 from collections import defaultdict
 from enum import Enum
 
-count = 7950
+count = 2148
 
 
 class State(Enum):
@@ -58,24 +58,38 @@ def BuildTree(filename: str) -> AutoTree:
                     size, name = line.split()
                     cwd[name] = int(size)
                     cwd[0] += int(size)
+    # Simulate "cd .." back to root if we reach the end while still in a subdir
+    while len(cwd_stack) > 1:
+        size = cwd[0]
+        cwd_stack.pop()
+        cwd = cwd_stack[-1]
+        cwd[0] += size
     return root
 
 
-def get_all_keys(d, key_pred=lambda x: True, value_pred=lambda x: True):
+def get_all_kv(d, key_pred=lambda x: True, value_pred=lambda x: True):
     for key, value in d.items():
         if key_pred(key) and value_pred(value):
             yield key, value
         if isinstance(value, dict):
-            yield from get_all_keys(value, key_pred, value_pred)
+            yield from get_all_kv(value, key_pred, value_pred)
 
 
 def solution7(filename: str) -> tuple[int, int]:
     tree = BuildTree(filename)
 
-    s = 0
-    for _, val in get_all_keys(tree, lambda x: x == 0, lambda x: x <= 100000):
-        s += val
-    return s, 0
+    # Part 1
+    part1 = 0
+    for _, val in get_all_kv(tree, lambda x: x == 0, lambda x: x <= 100000):
+        part1 += val
+
+    # Part 2
+    used_space = tree[0]
+    free_space = 70000000 - used_space
+    required = 30000000
+    free_require = required - free_space
+    part2 = min([v for k, v in get_all_kv(tree, lambda x: x == 0, lambda x: x >= free_require)])
+    return part1, part2
 
 
 if __name__ == '__main__':
